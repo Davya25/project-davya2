@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: rgb(209, 228, 228);
+            min-height: 400px;
+            text-align: center;
+            
+            }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #clockContainer {
+            display: none;
+            position: relative;
+            margin: auto;
+            height: 40vw;
+            width: 40vw;
+            background: url(https://media.geeksforgeeks.org/wp-content/uploads/20210302161254/imgonlinecomuaCompressToSizeOmNATjUMFKw-300x300.jpg) no-repeat;
+            background-size: 100%;
+        }
+
+        #hour, #minute, #second {
+            position: absolute;
+            background: black;
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+
+        #hour {
+            width: 1.8%;
+            height: 25%;
+            top: 25%;
+            left: 48.85%;
+            opacity: 0.8;
+        }
+
+        #minute {
+            width: 1.6%;
+            height: 30%;
+            top: 19%;
+            left: 48.9%;
+            opacity: 0.8;
+        }
+
+        #second {
+            width: 1%;
+            height: 40%;
+            top: 9%;
+            left: 49.25%;
+            opacity: 0.8;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="registrationContainer" >
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <div>
+       <button type="button" id="registerButton" class="btn btn-success">Register</button></div>
+    </form>
+</div>
+           
+        </form>
+    </div>
+   
+    <div class="container" id="loginContainer" style="display: none;" >
+        <h2>Login Form</h2>
+        <form id="loginForm" >
+            <div class="form-group">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sign In" id="loginButton">
+            </div>
+        </form>
+      
+    </div>
+    <div id="clockContainer" style="display: none;">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+</div>
+    <script>
+        const registrationContainer = document.getElementById('registrationContainer');
+        const loginContainer = document.getElementById('loginContainer');
+        const clockContainer = document.getElementById('clockContainer');
+
+        document.getElementById('registerButton').addEventListener('click', function() {
+            registrationContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+
+        document.getElementById('loginButton').addEventListener('click', function() {
+            loginContainer.style.display = 'none';
+            clockContainer.style.display = 'block';
+        });
+
+        function updateClock() {
+            const d = new Date();
+            const hr = d.getHours();
+            const min = d.getMinutes();
+            const sec = d.getSeconds();
+            const hr_rotation = 30 * hr + min / 2;
+            const min_rotation = 6 * min;
+            const sec_rotation = 6 * sec;
+
+            const hour = document.getElementById('hour');
+            const minute = document.getElementById('minute');
+            const second = document.getElementById('second');
+
+            hour.style.transform = rotate(${hr_rotation}deg);
+            minute.style.transform = rotate(${min_rotation}deg);
+            second.style.transform = rotate(${sec_rotation}deg);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>
